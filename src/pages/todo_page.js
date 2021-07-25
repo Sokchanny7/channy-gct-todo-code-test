@@ -12,7 +12,7 @@ const TodoPage = props => {
 
   useEffect(() => {
     fetchTodoList();
-    // inputRef.current.focus();
+    inputRef.current.focus();
   }, []);
 
   useEffect(() => {
@@ -96,6 +96,18 @@ const TodoPage = props => {
     ]);
   };
 
+  const checkDuplicate = () => {
+    if (todoList == undefined) return false;
+    const list = todoList.filter(element => {
+      if (
+        todoText == _.get(element, 'value') &&
+        todoText != _.get(editItem, 'value')
+      )
+        return element;
+    });
+    return list.length > 0;
+  };
+
   return (
     <div className="content">
       <TodoList
@@ -107,12 +119,13 @@ const TodoPage = props => {
         handleDeleteAll={handleDeleteAll}
       />
       <TodoController
-        disabled={todoText == undefined || todoText == ''}
+        disabled={todoText == undefined || todoText == '' || checkDuplicate()}
         isEdit={editItem != undefined}
         handleAdd={handleAdd}
         inputRef={inputRef}
         onChange={setTodoText}
         value={todoText}
+        isDuplicate={checkDuplicate()}
       />
     </div>
   );

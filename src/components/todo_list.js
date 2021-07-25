@@ -12,6 +12,7 @@ const TodoList = props => {
                 <div>Todo</div>
                 <div>
                   <button
+                    className="complete-button"
                     onClick={() => {
                       props.handleCompletAll && props.handleCompletAll();
                     }}
@@ -19,6 +20,7 @@ const TodoList = props => {
                     Complete all
                   </button>
                   <button
+                    className="delete-button"
                     onClick={() => {
                       props.handleDeleteAll && props.handleDeleteAll();
                     }}
@@ -48,8 +50,9 @@ const TodoList = props => {
                     >
                       {_.get(item, 'value')}
                     </p>
+                    <i className="date">{_.get(item, 'date')}</i>
                   </td>
-                  <td>
+                  <td align="right">
                     <button
                       onClick={() => {
                         props.handleEdit && props.handleEdit(item);

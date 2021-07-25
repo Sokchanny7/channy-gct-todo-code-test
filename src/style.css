@@ -1,6 +1,6 @@
 h1,
 p {
-  font-family: Lato;
+  font-family: Arial;
 }
 .row {
   display: flex;
@@ -25,7 +25,7 @@ p {
 
 .todo-controller {
   padding: 20px;
-  background-color: #080864;
+  background-color: #04aa6d;
 }
 
 .todo-controller input {
@@ -107,4 +107,27 @@ table tr:hover .action-button {
 
 .completed-text {
   text-decoration: line-through;
+  color: rgb(3, 58, 3);
+}
+
+.complete-button {
+  border: none;
+  color: white;
+  background-color: rgb(29, 59, 230);
+  margin-right: 10px;
+  padding: 4px 10px 4px 10px;
+}
+
+.delete-button {
+  border: none;
+  color: white;
+  padding: 4px 10px 4px 10px;
+  background-color: rgb(212, 73, 73);
+}
+
+.text-error {
+  color: red;
+}
+.date {
+  font-size: 7pt;
 }

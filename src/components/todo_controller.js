@@ -4,7 +4,7 @@ const TodoController = props => {
   const keyPressFunction = useCallback(
     event => {
       if (event.keyCode === 13) {
-        props.handleAdd && props.handleAdd();
+        if (!_.get(props, 'disabled')) props.handleAdd && props.handleAdd();
       }
     },
     [props]
@@ -18,27 +18,37 @@ const TodoController = props => {
   }, [keyPressFunction]);
 
   return (
-    <div className="todo-controller">
-      <div className="w-80">
-        <input
-          placeholder="What's todo?"
-          ref={props.inputRef}
-          type="text"
-          onChange={e => {
-            props.onChange && props.onChange(e.target.value);
-          }}
-          value={_.get(props, 'value')}
-        />
-      </div>
-      <div className="w-20">
-        <button
-          disabled={_.get(props, 'disabled')}
-          onClick={() => {
-            props.handleAdd && props.handleAdd();
-          }}
-        >
-          {_.get(props, 'isEdit') ? 'Update' : 'Add'}
-        </button>
+    <div>
+      {_.get(props, 'isDuplicate') == true && (
+        <div>
+          <i className={'text-error'}>
+            {_.get(props, 'value')} already has in todo list!!
+          </i>
+        </div>
+      )}
+
+      <div className="todo-controller">
+        <div className="w-80">
+          <input
+            placeholder="What's todo?"
+            ref={props.inputRef}
+            type="text"
+            onChange={e => {
+              props.onChange && props.onChange(e.target.value);
+            }}
+            value={_.get(props, 'value')}
+          />
+        </div>
+        <div className="w-20">
+          <button
+            disabled={_.get(props, 'disabled')}
+            onClick={() => {
+              props.handleAdd && props.handleAdd();
+            }}
+          >
+            {_.get(props, 'isEdit') ? 'Update' : 'Add'}
+          </button>
+        </div>
       </div>
     </div>
   );
