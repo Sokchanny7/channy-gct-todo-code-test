@@ -8,7 +8,14 @@ p {
 }
 .container {
   margin: auto;
-  width: 60%;
+  width: 600px;
+}
+
+@media only screen and (max-width: 600px) {
+  .container {
+    margin: auto;
+    width: 95%;
+  }
 }
 
 .content {
@@ -16,7 +23,7 @@ p {
 }
 
 .todo-list {
-  min-height: 80vh;
+  min-height: 78vh;
 }
 .todo-controller {
   height: 40px;
@@ -26,6 +33,7 @@ p {
 .todo-controller {
   padding: 20px;
   background-color: #04aa6d;
+  margin-bottom: 20px;
 }
 
 .todo-controller input {
@@ -81,14 +89,17 @@ table th {
 }
 
 .remove-button {
+  width: 50px;
   color: white;
   font-size: 8pt;
   padding: 10px;
+  margin-right: 10px;
   border: none;
   background-color: rgb(236, 65, 65);
 }
 
 .edit-button {
+  width: 50px;
   color: white;
   font-size: 8pt;
   padding: 10px;
