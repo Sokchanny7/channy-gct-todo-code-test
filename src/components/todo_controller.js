@@ -1,6 +1,22 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import _ from 'lodash';
 const TodoController = props => {
+  const keyPressFunction = useCallback(
+    event => {
+      if (event.keyCode === 13) {
+        props.handleAdd && props.handleAdd();
+      }
+    },
+    [props]
+  );
+
+  useEffect(() => {
+    document.addEventListener('keydown', keyPressFunction, false);
+    return () => {
+      document.removeEventListener('keydown', keyPressFunction, false);
+    };
+  }, [keyPressFunction]);
+
   return (
     <div className="todo-controller">
       <div className="w-80">
