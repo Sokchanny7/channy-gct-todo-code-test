@@ -11,6 +11,7 @@ const TodoPage = props => {
 
   useEffect(() => {
     fetchTodoList();
+    // inputRef.current.focus();
   }, []);
 
   useEffect(() => {
@@ -39,7 +40,7 @@ const TodoPage = props => {
   };
 
   return (
-    <div>
+    <div className="content">
       <TodoList todoList={todoList} />
       <TodoController
         handleAdd={handleAdd}

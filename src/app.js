@@ -3,7 +3,7 @@ import './style.css';
 import TodoPage from './pages/todo_page';
 const App = () => {
   return (
-    <div>
+    <div className="container">
       <h1>Hello, Welcome Back!</h1>
       <TodoPage />
     </div>

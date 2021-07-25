@@ -3,6 +3,22 @@ p {
   font-family: Lato;
 }
 
+.container {
+  margin: auto;
+  width: 60%;
+}
+
+.content {
+  height: 90vh;
+}
+
+.todo-list {
+  height: 80vh;
+}
+.todo-controller {
+  height: 40px;
+}
+
 .todo-controller {
   padding: 20px;
   background-color: #080864;
