@@ -8,25 +8,26 @@ const TodoList = props => {
         <thead>
           <tr>
             <th colSpan={2} align="right">
-              <button
-                onClick={() => {
-                  props.handleCompletAll && props.handleCompletAll(index);
-                }}
-              >
-                Complete all
-              </button>
-              <button
-                onClick={() => {
-                  props.handleDeleteAll && props.handleDeleteAll(index);
-                }}
-              >
-                Delete
-              </button>
+              <div className="row">
+                <div>Todo</div>
+                <div>
+                  <button
+                    onClick={() => {
+                      props.handleCompletAll && props.handleCompletAll();
+                    }}
+                  >
+                    Complete all
+                  </button>
+                  <button
+                    onClick={() => {
+                      props.handleDeleteAll && props.handleDeleteAll();
+                    }}
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
             </th>
-          </tr>
-          <tr>
-            <th>Todo</th>
-            <th width={100} />
           </tr>
         </thead>
         <tbody>
@@ -35,6 +36,7 @@ const TodoList = props => {
               return (
                 <tr>
                   <td
+                    width="70%"
                     onClick={() => {
                       props.handleSingleClick && props.handleSingleClick(index);
                     }}

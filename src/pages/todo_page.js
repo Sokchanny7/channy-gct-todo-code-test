@@ -62,6 +62,14 @@ const TodoPage = props => {
     ]);
   };
 
+  const handleDeleteAll = () => {
+    setTodoList([
+      ...todoList.filter(element => {
+        if (!element.completed) return element;
+      })
+    ]);
+  };
+
   const handleEdit = item => {
     setEditItem(item);
     setTodoText(_.get(item, 'value'));
@@ -72,6 +80,22 @@ const TodoPage = props => {
     setTodoList([...todoList]);
   };
 
+  const handleCompletAll = () => {
+    var isSelectedAll = false;
+    for (var i = 0; i < todoList.length; i++) {
+      if (!todoList[i].completed) {
+        isSelectedAll = true;
+        break;
+      }
+    }
+    setTodoList([
+      ...todoList.map(element => {
+        element.completed = isSelectedAll;
+        return element;
+      })
+    ]);
+  };
+
   return (
     <div className="content">
       <TodoList
@@ -79,6 +103,8 @@ const TodoPage = props => {
         handleEdit={handleEdit}
         handleDelete={handleDelete}
         handleSingleClick={handleSingleClick}
+        handleCompletAll={handleCompletAll}
+        handleDeleteAll={handleDeleteAll}
       />
       <TodoController
         disabled={todoText == undefined || todoText == ''}

@@ -2,7 +2,10 @@ h1,
 p {
   font-family: Lato;
 }
-
+.row {
+  display: flex;
+  justify-content: space-between;
+}
 .container {
   margin: auto;
   width: 60%;
