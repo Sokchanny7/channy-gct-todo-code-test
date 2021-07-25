@@ -67,12 +67,18 @@ const TodoPage = props => {
     setTodoText(_.get(item, 'value'));
   };
 
+  const handleSingleClick = index => {
+    todoList[index].completed = !todoList[index].completed;
+    setTodoList([...todoList]);
+  };
+
   return (
     <div className="content">
       <TodoList
         todoList={todoList}
         handleEdit={handleEdit}
         handleDelete={handleDelete}
+        handleSingleClick={handleSingleClick}
       />
       <TodoController
         disabled={todoText == undefined || todoText == ''}

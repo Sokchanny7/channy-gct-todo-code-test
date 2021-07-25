@@ -6,7 +6,6 @@ const TodoList = props => {
     <div className="todo-list">
       <table>
         <thead>
-          <th>#</th>
           <th>Todo</th>
           <th width={100} />
         </thead>
@@ -15,9 +14,19 @@ const TodoList = props => {
             _.get(props, 'todoList').map((item, index) => {
               return (
                 <tr>
-                  <td>#</td>
-                  <td>
-                    <p>{_.get(item, 'value')}</p>
+                  
+                  <td
+                    onClick={() => {
+                      props.handleSingleClick && props.handleSingleClick(index);
+                    }}
+                  >
+                    <p
+                      className={`${
+                        _.get(item, 'completed') ? 'completed-text' : ''
+                      }`}
+                    >
+                      {_.get(item, 'value')}
+                    </p>
                   </td>
                   <td>
                     <button

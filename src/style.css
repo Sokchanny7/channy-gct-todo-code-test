@@ -101,3 +101,7 @@ table th {
 table tr:hover .action-button {
   display: inline-block;
 }
+
+.completed-text {
+  text-decoration: line-through;
+}
