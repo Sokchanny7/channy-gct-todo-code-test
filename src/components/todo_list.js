@@ -6,15 +6,34 @@ const TodoList = props => {
     <div className="todo-list">
       <table>
         <thead>
-          <th>Todo</th>
-          <th width={100} />
+          <tr>
+            <th colSpan={2} align="right">
+              <button
+                onClick={() => {
+                  props.handleCompletAll && props.handleCompletAll(index);
+                }}
+              >
+                Complete all
+              </button>
+              <button
+                onClick={() => {
+                  props.handleDeleteAll && props.handleDeleteAll(index);
+                }}
+              >
+                Delete
+              </button>
+            </th>
+          </tr>
+          <tr>
+            <th>Todo</th>
+            <th width={100} />
+          </tr>
         </thead>
         <tbody>
           {_.get(props, 'todoList') &&
             _.get(props, 'todoList').map((item, index) => {
               return (
                 <tr>
-                  
                   <td
                     onClick={() => {
                       props.handleSingleClick && props.handleSingleClick(index);
