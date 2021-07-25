@@ -13,10 +13,11 @@ p {
 }
 
 .todo-list {
-  height: 80vh;
+  min-height: 80vh;
 }
 .todo-controller {
   height: 40px;
+  position: relative;
 }
 
 .todo-controller {
@@ -46,4 +47,57 @@ p {
 .w-20 {
   width: 20%;
   display: inline;
+}
+
+table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table td,
+table th {
+  /* border: 1px solid #ddd; */
+  padding: 8px;
+}
+
+table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+table tr:hover {
+  background-color: #ddd;
+}
+
+table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04aa6d;
+  color: white;
+}
+
+.remove-button {
+  color: white;
+  font-size: 8pt;
+  padding: 10px;
+  border: none;
+  background-color: rgb(236, 65, 65);
+}
+
+.edit-button {
+  color: white;
+  font-size: 8pt;
+  padding: 10px;
+  margin-right: 10px;
+  border: none;
+  background-color: rgb(56, 108, 221);
+}
+
+.action-button {
+  display: none;
+}
+
+table tr:hover .action-button {
+  display: inline-block;
 }

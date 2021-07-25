@@ -21,6 +21,7 @@ const TodoController = props => {
     <div className="todo-controller">
       <div className="w-80">
         <input
+          placeholder="What's todo?"
           ref={props.inputRef}
           type="text"
           onChange={e => {
@@ -31,11 +32,12 @@ const TodoController = props => {
       </div>
       <div className="w-20">
         <button
+          disabled={_.get(props, 'disabled')}
           onClick={() => {
             props.handleAdd && props.handleAdd();
           }}
         >
-          Add
+          {_.get(props, 'isEdit') ? 'Update' : 'Add'}
         </button>
       </div>
     </div>
