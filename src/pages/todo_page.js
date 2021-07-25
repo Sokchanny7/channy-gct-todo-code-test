@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import AppConfig from '../config/app_config';
 import _ from 'lodash';
 import TodoList from '../components/todo_list';
+import TodoController from '../components/todo_controller';
 const TodoPage = props => {
+  const inputRef = useRef(null);
   const [todoList, setTodoList] = useState([]);
   const [todoText, setTodoText] = useState();
 
@@ -23,14 +25,7 @@ const TodoPage = props => {
   return (
     <div>
       <TodoList todoList={todoList} />
-      <div>
-        <div>
-          <input type="text" onChage={setTodoText} value={todoText} />
-        </div>
-        <div>
-          <button onClick={handleAdd}>Add</button>
-        </div>
-      </div>
+      <TodoController inputRef={inputRef} />
     </div>
   );
 };
