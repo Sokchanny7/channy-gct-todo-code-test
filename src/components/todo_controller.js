@@ -28,8 +28,21 @@ const TodoController = props => {
       )}
 
       <div className="todo-controller">
-        <div className="w-80">
+        {_.get(props, 'isEdit') && (
+          <div className="w-20">
+            <button
+              className="cancel-button"
+              onClick={() => {
+                props.handleCancel && props.handleCancel();
+              }}
+            >
+              Cancel
+            </button>
+          </div>
+        )}
+        <div className={`${_.get(props, 'isEdit') ? 'w-60' : 'w-80'}`}>
           <input
+            className={`${_.get(props, 'isEdit') ? 'w-60' : 'w-80'}`}
             placeholder="What's todo?"
             ref={props.inputRef}
             type="text"

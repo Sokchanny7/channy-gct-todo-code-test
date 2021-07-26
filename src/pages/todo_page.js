@@ -108,6 +108,11 @@ const TodoPage = props => {
     return list.length > 0;
   };
 
+  const handleCancel = () => {
+    setTodoText('');
+    setEditItem(undefined);
+  };
+
   return (
     <div className="content">
       <TodoList
@@ -122,6 +127,7 @@ const TodoPage = props => {
         disabled={todoText == undefined || todoText == '' || checkDuplicate()}
         isEdit={editItem != undefined}
         handleAdd={handleAdd}
+        handleCancel={handleCancel}
         inputRef={inputRef}
         onChange={setTodoText}
         value={todoText}
