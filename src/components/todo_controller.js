@@ -27,6 +27,12 @@ const TodoController = props => {
         </div>
       )}
 
+      {_.get(props, 'isEmpty') == true && (
+        <div>
+          <i className={'text-error'}>Empty list</i>
+        </div>
+      )}
+
       <div className="todo-controller">
         {_.get(props, 'isEdit') && (
           <div className="w-20">

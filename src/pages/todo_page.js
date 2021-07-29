@@ -7,8 +7,10 @@ import moment from 'moment';
 const TodoPage = props => {
   const inputRef = useRef(null);
   const [todoList, setTodoList] = useState([]);
+  const [todoFilter, setTodoFilter] = useState([]);
   const [todoText, setTodoText] = useState();
   const [editItem, setEditItem] = useState();
+  const [isDuplicate, setIsDuplicate] = useState(false);
 
   useEffect(() => {
     fetchTodoList();
@@ -24,13 +26,20 @@ const TodoPage = props => {
     }
   }, [todoList]);
 
+  useEffect(() => {
+    if (editItem == undefined && todoText) handleFilter();
+  }, [todoText]);
+
   const fetchTodoList = () => {
     const object = localStorage.getItem(AppConfig.MY_TODO_LIST_KEY);
     if (object != undefined) setTodoList(JSON.parse(object));
   };
 
   const handleAdd = () => {
-    if (todoText == undefined || todoText == '') return;
+    if (todoText == undefined || todoText == '' || todoText == ' ') return;
+
+    if (checkDuplicate()) return;
+
     if (editItem) {
       setTodoList([
         ...todoList.map(element => {
@@ -43,12 +52,12 @@ const TodoPage = props => {
       setEditItem(undefined);
     } else {
       setTodoList([
-        ...(todoList ?? []),
         {
           id: todoList != undefined ? todoList.length + 1 : 1,
           date: moment().format('MM-DD-YYYY hh:mm'),
-          value: todoText
-        }
+          value: todoText.trim()
+        },
+        ...(todoList ?? [])
       ]);
     }
     setTodoText('');
@@ -96,16 +105,38 @@ const TodoPage = props => {
     ]);
   };
 
+  const handleFilter = () => {
+    if (isDuplicate) setIsDuplicate(false);
+    const list = todoList.filter(element => {
+      if (
+        _.get(element, 'value', '')
+          .toLowerCase()
+          .includes(todoText.toLowerCase())
+      ) {
+        return element;
+      }
+    });
+    setTodoFilter(list);
+  };
+
   const checkDuplicate = () => {
     if (todoList == undefined) return false;
     const list = todoList.filter(element => {
       if (
-        todoText == _.get(element, 'value') &&
-        todoText != _.get(editItem, 'value')
+        todoText.trim().toLowerCase() ==
+          _.get(element, 'value', '')
+            .trim()
+            .toLowerCase() &&
+        todoText.trim().toLowerCase() !=
+          _.get(editItem, 'value', '')
+            .trim()
+            .toLowerCase()
       )
         return element;
     });
-    return list.length > 0;
+    const value = list.length > 0;
+    setIsDuplicate(value);
+    return value;
   };
 
   const handleCancel = () => {
@@ -116,7 +147,17 @@ const TodoPage = props => {
   return (
     <div className="content">
       <TodoList
-        todoList={todoList}
+        isEmpty={
+          editItem == undefined &&
+          todoText != undefined &&
+          todoText != '' &&
+          todoFilter.length <= 0
+        }
+        todoList={
+          editItem == undefined && todoText != undefined && todoText != ''
+            ? todoFilter
+            : todoList
+        }
         handleEdit={handleEdit}
         handleDelete={handleDelete}
         handleSingleClick={handleSingleClick}
@@ -124,14 +165,20 @@ const TodoPage = props => {
         handleDeleteAll={handleDeleteAll}
       />
       <TodoController
-        disabled={todoText == undefined || todoText == '' || checkDuplicate()}
+        disabled={todoText == undefined || todoText == ''}
         isEdit={editItem != undefined}
         handleAdd={handleAdd}
         handleCancel={handleCancel}
         inputRef={inputRef}
         onChange={setTodoText}
         value={todoText}
-        isDuplicate={checkDuplicate()}
+        isDuplicate={isDuplicate}
+        isEmpty={
+          editItem == undefined &&
+          todoText != undefined &&
+          todoText != '' &&
+          todoFilter.length <= 0
+        }
       />
     </div>
   );

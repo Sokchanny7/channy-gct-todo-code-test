@@ -33,46 +33,55 @@ const TodoList = props => {
           </tr>
         </thead>
         <tbody>
-          {_.get(props, 'todoList') &&
-            _.get(props, 'todoList').map((item, index) => {
-              return (
-                <tr>
-                  <td
-                    width="70%"
-                    onClick={() => {
-                      props.handleSingleClick && props.handleSingleClick(index);
-                    }}
-                  >
-                    <p
-                      className={`${
-                        _.get(item, 'completed') ? 'completed-text' : ''
-                      }`}
-                    >
-                      {_.get(item, 'value')}
-                    </p>
-                    <i className="date">{_.get(item, 'date')}</i>
-                  </td>
-                  <td align="right">
-                    <button
+          {/* {_.get(props, 'isEmpty') && (
+            <tr>
+              <td>Empty list</td>
+            </tr>
+          )} */}
+          {!_.get(props, 'isEmpty') &&
+            _.get(props, 'todoList') &&
+            _.get(props, 'todoList')
+              //.reverse()
+              .map((item, index) => {
+                return (
+                  <tr>
+                    <td
+                      width="70%"
                       onClick={() => {
-                        props.handleEdit && props.handleEdit(item);
+                        props.handleSingleClick &&
+                          props.handleSingleClick(index);
                       }}
-                      className="edit-button action-button"
                     >
-                      Edit
-                    </button>
-                    <button
-                      onClick={() => {
-                        props.handleDelete && props.handleDelete(item);
-                      }}
-                      className="remove-button action-button"
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              );
-            })}
+                      <p
+                        className={`${
+                          _.get(item, 'completed') ? 'completed-text' : ''
+                        }`}
+                      >
+                        {_.get(item, 'value')}
+                      </p>
+                      <i className="date">{_.get(item, 'date')}</i>
+                    </td>
+                    <td align="right">
+                      <button
+                        onClick={() => {
+                          props.handleEdit && props.handleEdit(item);
+                        }}
+                        className="edit-button action-button"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => {
+                          props.handleDelete && props.handleDelete(item);
+                        }}
+                        className="remove-button action-button"
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
         </tbody>
       </table>
     </div>
